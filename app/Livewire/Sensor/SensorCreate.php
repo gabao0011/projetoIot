@@ -2,32 +2,37 @@
 
 namespace App\Livewire\Sensor;
 
+use App\Models\Ambiente;
 use App\Models\Sensor;
 use Livewire\Component;
 
 class SensorCreate extends Component
 {
-    public $ambiente_id;
-    public $codigo;
-    public $tipo;
-    public $descricao;
-    public $status;
-    
-    public function store(){
-        Sensor::create([
-            'ambiente_id' => $this->ambiente_id,
-            'codigo' => $this->codigo,
-            'tipo' => $this->tipo,
-            'descricao' => $this->descricao,
-            'status' => $this->status
+    public $ambiente_id = '';
+    public $codigo = '';
+    public $tipo = '';
+    public $descricao = '';
+    public $status = true;
+
+    public function store()
+    {
+        $dados = $this->validate([
+            'ambiente_id' => 'required|integer|exists:ambientes,id',
+            'codigo' => 'required|string|max:255|unique:sensors,codigo',
+            'tipo' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'status' => 'required|boolean',
         ]);
 
-    session()->flash('success', 'Cadastrado');
-    return redirect()->route('ambiente.index');
+        Sensor::create($dados);
+        session()->flash('success', 'Sensor cadastrado com sucesso!');
+        return redirect()->route('sensor.index');
     }
 
     public function render()
     {
-        return view('livewire.sensor.sensor-create');
+        return view('livewire.sensor.sensor-create', [
+            'ambientes' => Ambiente::orderBy('nome')->get(),
+        ]);
     }
 }

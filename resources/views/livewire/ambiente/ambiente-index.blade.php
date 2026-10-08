@@ -31,7 +31,7 @@
                         <td>{{$a->id}}</td>
                         <td>{{$a->nome}}</td>
                         <td>{{$a->descricao}}</td>
-                        <td>{{$a->status}}</td>
+                        <td>{{ $a->status ? 'Ativo' : 'Inativo' }}</td>
                         <td>
                             <a href="{{ route('ambiente.edit', ['id' => $a->id])}}"
                                 class="btn btn-primary btn-sm">Editar</a>

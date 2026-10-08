@@ -8,7 +8,7 @@
     @endif
 
     <div class="mt-3 mb-3">
-        <h2>Ambientes</h2>
+        <h2>Sensores</h2>
         <a href= "{{ route('sensor.create')}}">
         <button type="button" class="btn btn-primary">Cadastrar Sensor <i class="bi bi-plus-lg"></i></button></a>
     </div>
@@ -31,11 +31,11 @@
                     @foreach($sensores as $s)
                     <tr>
                         <td>{{$s->id}}</td>
-                        <td>{{$s->ambiente_id}}</td>
+                        <td>{{ $nomesAmbientes[$s->ambiente_id] ?? 'Ambiente não encontrado' }} (ID: {{ $s->ambiente_id }})</td>
                         <td>{{$s->codigo}}</td>
                         <td>{{$s->tipo}}</td>
                         <td>{{$s->descricao}}</td>
-                        <td>{{$s->status}}</td>
+                        <td>{{ $s->status ? 'Ativo' : 'Inativo' }}</td>
                         <td>
                             <a href="{{ route('sensor.edit', ['id' => $s->id])}}"
                                 class="btn btn-primary btn-sm">Editar</a>

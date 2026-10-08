@@ -4,37 +4,43 @@
         <div class="card-body">
             <form wire:submit.prevent="store">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Ambiente</label>
+                    <label for="ambiente_id" class="form-label">Ambiente</label>
+                    <select id="ambiente_id" class="form-select" wire:model="ambiente_id" required>
+                        <option value="">Selecione um ambiente</option>
+                        @foreach($ambientes as $ambiente)
+                            <option value="{{ $ambiente->id }}">{{ $ambiente->nome }} (ID: {{ $ambiente->id }})</option>
+                        @endforeach
+                    </select>
+                    @if($ambientes->isEmpty())
+                        <div class="text-warning mt-1">Cadastre primeiro um <a href="{{ route('ambiente.create') }}">ambiente</a>.</div>
+                    @endif
+                    @error('ambiente_id') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
                     <label for="codigo" class="form-label">Código</label>
-                    <input type="text" class="form-control" wire:model="codigo" name="codigo" id="codigo"
-                        placeholder="">
+                    <input id="codigo" type="text" class="form-control" wire:model="codigo" required>
+                    @error('codigo') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
-                    <input type="text" class="form-control" wire:model="tipo" name="tipo" id="tipo"
-                        placeholder="">
+                    <input id="tipo" type="text" class="form-control" wire:model="tipo" placeholder="Ex.: temperatura, umidade" required>
+                    @error('tipo') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
-
                 <div class="mb-3">
                     <label for="descricao" class="form-label">Descrição</label>
-                    <textarea class="form-control" name="descricao" id="descricao" rows="4" wire:model="descricao"></textarea>
+                    <textarea id="descricao" class="form-control" rows="4" wire:model="descricao" required></textarea>
+                    @error('descricao') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
-
                 <div class="mb-3">
-                    <label for="status" class="">Status</label>
+                    <label for="status" class="form-label">Status</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                        <label class="form-check-label" for="switchCheckDefault" wire:model='status'>Desativo/Ativo</label>
+                        <input id="status" class="form-check-input" type="checkbox" role="switch" wire:model="status">
+                        <label for="status" class="form-check-label">{{ $status ? 'Ativo' : 'Inativo' }}</label>
                     </div>
+                    @error('status') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="{{ route('sensor.index')}}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                </div>
-
+                <button type="submit" class="btn btn-primary" @disabled($ambientes->isEmpty())>Salvar</button>
+                <a href="{{ route('sensor.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
