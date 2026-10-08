@@ -9,8 +9,8 @@
 
     <div class="mt-3 mb-3">
         <h2>Ambientes</h2>
-        <a href= "{{ route('ambiente.create')}}">
-        <button type="button" class="btn btn-primary">Cadastrar Ambiente <i class="bi bi-plus-lg"></i></button></a>
+        <a href= "{{ route('sensor.create')}}">
+        <button type="button" class="btn btn-primary">Cadastrar Sensor <i class="bi bi-plus-lg"></i></button></a>
     </div>
 
     <div class="card">
@@ -19,23 +19,27 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nome</th>
+                        <th>Ambiente</th>
+                        <th>Código</th>
+                        <th>Tipo</th>
                         <th>Descrição</th>
                         <th>Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach($ambientes as $a)
+                    @foreach($sensores as $s)
                     <tr>
-                        <td>{{$a->id}}</td>
-                        <td>{{$a->nome}}</td>
-                        <td>{{$a->descricao}}</td>
-                        <td>{{$a->status}}</td>
+                        <td>{{$s->id}}</td>
+                        <td>{{$s->ambiente_id}}</td>
+                        <td>{{$s->codigo}}</td>
+                        <td>{{$s->tipo}}</td>
+                        <td>{{$s->descricao}}</td>
+                        <td>{{$s->status}}</td>
                         <td>
-                            <a href="{{ route('ambiente.edit', ['id' => $a->id])}}"
+                            <a href="{{ route('sensor.edit', ['id' => $s->id])}}"
                                 class="btn btn-primary btn-sm">Editar</a>
-                            <button class="btn btn-danger btn-sm" wire:confirm="Deseja excluir o ambiente">Excluir</button>
+                            <button class="btn btn-danger btn-sm" wire:confirm="Deseja excluir o sensor">Excluir</button>
                         </td>
                     </tr>
                     @endforeach

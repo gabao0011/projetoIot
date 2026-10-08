@@ -18,7 +18,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"><a class="nav-link" aria-current="page" href="dashboard"><i class="bi bi-house-fill"></i> Dashboard</a></li>
       <li class="nav-item"><a class="nav-link" href="{{ route('ambiente.index')}}"><i class="bi bi-leaf-fill"></i> Ambiente</a></li>
-      <li class="nav-item"><a class="nav-link" href=""><i class="bi bi-cpu"></i> Sensor</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ route('sensor.index')}}"><i class="bi bi-cpu"></i> Sensor</a></li>
       
     </ul>
   </nav>
