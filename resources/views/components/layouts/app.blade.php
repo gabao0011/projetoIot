@@ -10,7 +10,22 @@
 
     </head>
     <body>
-        {{ $slot }}
+        <div class="d-flex" style="min-height: 100vh">
+  <nav class="d-flex flex-column flex-shrink-0 p-3 bg-body border-end" style="width: 260px" aria-label="Main navigation">
+    <a href="#" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none fs-5 fw-semibold">
+      <i></i>Projeto IOT
+    </a>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item"><a class="nav-link" aria-current="page" href="dashboard"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ route('ambiente.index')}}"><i class="bi bi-leaf-fill"></i> Ambiente</a></li>
+      <li class="nav-item"><a class="nav-link" href=""><i class="bi bi-cpu"></i> Sensor</a></li>
+      
+    </ul>
+  </nav>
+  <main class="flex-grow-1 p-4">{{ $slot }}</main>
+</div>
+
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -9,12 +9,10 @@ use App\Models\Registro;
 
 class Dashboard extends Component
 {
-    // Propriedade para filtrar por ambiente via select
     public $ambienteSelecionado = '';
 
     public function render()
     {
-        // 1. Busca todos os ambientes para o select do filtro
         $ambientes = Ambiente::all();
 
         // 2. Conta os sensores cadastrados
